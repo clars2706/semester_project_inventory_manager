@@ -11,6 +11,14 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS inventory (
                     ppu REAL NOT NULL
                     )''')
 
+cursor.execute('''CREATE TABLE IF NOT EXISTS activity_log (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    action TEXT NOT NULL,
+                    sku INTEGER,
+                    product TEXT,
+                    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+                    )''')
+
 connection.commit()
 connection.close()
 
@@ -48,6 +56,8 @@ class InventoryManager:
             self.cursor.execute('''INSERT INTO inventory (SKU, product, supplier, quantity, ppu)
                                    VALUES (?, ?, ?, ?, ?)''',
                                 (sku, product, supplier, quantity, ppu))
+            self.cursor.execute('INSERT INTO activity_log (action, sku, product) VALUES (?, ?, ?)',
+                                ('Added', sku, product))
             self.connection.commit()
             return True
         except sqlite3.IntegrityError as e:
@@ -57,6 +67,26 @@ class InventoryManager:
             print(f"Error adding item: {e}")
             return False
     
+    def get_recent_activity(self, limit=5):
+        try:
+            self.cursor.execute(
+                'SELECT action, sku, product, timestamp FROM activity_log ORDER BY id DESC LIMIT ?',
+                (limit,))
+            return self.cursor.fetchall()
+        except Exception as e:
+            print(f"Error fetching recent activity: {e}")
+            return []
+
+    def get_low_stock(self, threshold=10):
+        try:
+            self.cursor.execute(
+                'SELECT SKU, product, quantity FROM inventory WHERE quantity < ? ORDER BY quantity ASC',
+                (threshold,))
+            return self.cursor.fetchall()
+        except Exception as e:
+            print(f"Error fetching low stock: {e}")
+            return []
+
     def close(self):
         """Close database connection"""
         if self.connection:

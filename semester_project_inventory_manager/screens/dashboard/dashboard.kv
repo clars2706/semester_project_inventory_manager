@@ -2,83 +2,112 @@
 
 <DashboardScreen>:
     name: 'dashboard'
-    
+
     BoxLayout:
         orientation: 'vertical'
-        padding: 20
-        spacing: 20
-        
+        padding: '10dp'
+        spacing: '10dp'
+
         # Header
         BoxLayout:
-            orientation: 'vertical'
+            orientation: 'horizontal'
             size_hint_y: None
-            height: '100dp'
-            spacing: 10
-            
+            height: '60dp'
             canvas.before:
                 Color:
                     rgba: (0.1, 0.4, 0.7, 1)
                 Rectangle:
                     size: self.size
                     pos: self.pos
-            
+
             Label:
                 text: 'Inventory Manager'
-                font_size: '32sp'
+                font_size: '24sp'
                 bold: True
                 color: (1, 1, 1, 1)
-                size_hint_y: 0.6
-            
-            Label:
-                text: 'Dashboard'
-                font_size: '16sp'
-                color: (1, 1, 1, 0.8)
-                size_hint_y: 0.4
-        
-        # Main content area
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+                padding: 10, 0
+
+            Button:
+                text: 'Profile / Settings'
+                size_hint: None, None
+                size: '140dp', '40dp'
+                font_size: '13sp'
+                background_color: (0.18, 0.48, 0.85, 1)
+                on_press: root.show_settings()
+
+        # Quick Add Item button
+        Button:
+            text: '+ Quick Add Item'
+            font_size: '16sp'
+            size_hint_y: None
+            height: '52dp'
+            background_color: (0.15, 0.7, 0.35, 1)
+            color: (1, 1, 1, 1)
+            on_press: root.show_quick_add()
+
+        # Low Stock Alerts section
         BoxLayout:
             orientation: 'vertical'
-            spacing: 20
-            
-            # Welcome message
+            size_hint_y: None
+            height: self.minimum_height
+            spacing: '4dp'
+            padding: '10dp', '8dp'
+            canvas.before:
+                Color:
+                    rgba: (1, 0.94, 0.94, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
             Label:
-                text: 'Welcome to Inventory Management System'
-                font_size: '20sp'
+                text: '⚠  Low Stock Alerts'
+                font_size: '15sp'
                 bold: True
-                size_hint_y: 0.2
-            
-            Label:
-                text: 'Select an option from the menu below to get started'
-                font_size: '14sp'
-                color: (0.5, 0.5, 0.5, 1)
-                size_hint_y: 0.1
-            
-            # Quick action buttons
+                color: (0.75, 0.1, 0.1, 1)
+                size_hint_y: None
+                height: '34dp'
+                text_size: self.size
+                halign: 'left'
+
             GridLayout:
+                id: low_stock_grid
+                cols: 3
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: '2dp'
+
+        # Recent Activity section
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            spacing: '4dp'
+            padding: '10dp', '8dp'
+            canvas.before:
+                Color:
+                    rgba: (0.94, 0.96, 1, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Label:
+                text: 'Recent Activity'
+                font_size: '15sp'
+                bold: True
+                color: (0.1, 0.3, 0.65, 1)
+                size_hint_y: None
+                height: '34dp'
+                text_size: self.size
+                halign: 'left'
+
+            GridLayout:
+                id: activity_grid
                 cols: 1
-                spacing: 10
-                size_hint_y: 0.7
-                
-                Button:
-                    text: 'Add New Item'
-                    font_size: '16sp'
-                    background_color: (0.2, 0.6, 0.8, 1)
-                    on_press: root.manager.current = 'item_add'
-                
-                Button:
-                    text: 'Manage Inventory'
-                    font_size: '16sp'
-                    background_color: (0.2, 0.6, 0.8, 1)
-                    on_press: root.manager.current = 'item_manager'
-                
-                Button:
-                    text: 'View Reports'
-                    font_size: '16sp'
-                    background_color: (0.2, 0.6, 0.8, 1)
-                    on_press: root.manager.current = 'reports'
-                
-                Button:
-                    text: 'More Options'
-                    font_size: '16sp'
-                    background_color: (0.7, 0.7, 0.7, 1)
-                    on_press: root.show_menu()
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: '2dp'
+
+        Widget:

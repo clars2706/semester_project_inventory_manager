@@ -1,7 +1,7 @@
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty, BooleanProperty
 
 
 class WindowManager(ScreenManager):
@@ -12,9 +12,14 @@ class WindowManager(ScreenManager):
 class AppShell(BoxLayout):
     screen_manager = ObjectProperty()
     tabs = ObjectProperty()
+    sidebar_open = BooleanProperty(False)
+
+    def toggle_sidebar(self):
+        self.sidebar_open = not self.sidebar_open
 
     def change_screen(self, screen):
         """Change to the selected screen."""
+        self.sidebar_open = False
         self.screen_manager.current = screen
 
         # Load screen-specific data when entering

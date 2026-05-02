@@ -13,8 +13,15 @@ Builder.load_file(os.path.join(os.path.dirname(__file__), 'dashboard.kv'))
 class DashboardScreen(Screen):
     """Main dashboard screen with navigation pop-up menu."""
     
+    from kivy.properties import BooleanProperty
+    sidebar_open = BooleanProperty(False)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+    def toggle_sidebar(self):
+        """Toggle the sidebar open/close state."""
+        self.sidebar_open = not self.sidebar_open
     
     def show_menu(self):
         """Display the navigation menu pop-up."""

@@ -2,8 +2,6 @@ from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import ObjectProperty
-
-
 class WindowManager(ScreenManager):
     """Manages the switching between different content screens."""
     pass

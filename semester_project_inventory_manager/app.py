@@ -33,15 +33,7 @@ class MultiScreenApp(App):
             print(f"Warning: Could not load custom fonts - {e}")
 
         # Load stylesheets (optional)
-        try:
-            Builder.load_file(os.path.join(self.resource_path, "stylesheets", "style.kv"))
-        except Exception as e:
-            print(f"Warning: Could not load stylesheet - {e}")
-        
-        self.shell = AppShell()
-        self.shell.set_dashboard()
-        
-        return self.shell
+
     
     @property
     def base_path(self):

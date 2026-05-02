@@ -1,0 +1,44 @@
+#:kivy 1.0
+
+<ItemManagerScreen>:
+    name: 'item_manager'
+    
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 15
+        
+        Label:
+            text: 'Inventory Manager'
+            font_size: '24sp'
+            bold: True
+            size_hint_y: None
+            height: '50dp'
+        
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: '50dp'
+            spacing: 10
+            
+            TextInput:
+                id: search_input
+                multiline: False
+                hint_text: 'Search by product or supplier...'
+                size_hint_x: 0.8
+            
+            Button:
+                text: 'Search'
+                size_hint_x: 0.2
+                on_press: root.search_items(search_input.text)
+        
+        ScrollView:
+            size_hint_y: 0.9
+            
+            GridLayout:
+                id: items_grid
+                cols: 6
+                spacing: 5
+                size_hint_y: None
+                height: self.minimum_height
+                padding: 5

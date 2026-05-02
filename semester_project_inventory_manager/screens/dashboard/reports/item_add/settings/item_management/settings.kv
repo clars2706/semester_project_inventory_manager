@@ -1,0 +1,106 @@
+#:kivy 1.0
+#:import utils kivy.utils
+
+<SettingsScreen>:
+
+
+    BoxLayout:
+        orientation: 'vertical'
+   
+        Label:
+            text: "Settings"
+            font_size: '40sp'
+            size_hint: (1, None)
+            height: '100dp'
+            color: utils.get_color_from_hex("#FFFFFF")
+
+            canvas.before:
+                Color:
+                    rgba: utils.get_color_from_hex("#000000")
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+    
+        BoxLayout:
+            padding: 5
+            orientation: 'vertical'
+            padding: [17, 10]
+
+            Label:
+                text: "Username"
+                font_size: '32sp'
+                size_hint: (1, None)
+                height: '80dp'
+            
+            TextBox:
+                id: txtUsername
+                hint_text: "..."
+                size_hint: (1, None)
+                height: '50dp'
+                on_text: root.schedule_username_update()
+
+            
+            Label:
+                text: "Email"
+                font_size: '32sp'
+                size_hint: (1, None)
+                height: '80dp'
+            
+            TextBox:
+                id: txtEmail
+                hint_text: "..."
+                size_hint: (1, None)
+                height: '50dp'
+                on_text: root.schedule_email_update()
+
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: (1, None)
+                height: '120dp'
+
+                Label:
+                    text: "Notifications"
+                    font_size: '32sp'
+                
+                AppToggle:
+                    id: tglNotificationsToggle
+                    size_hint: (None, None)
+                    width: '80dp'
+                    height: '40dp'
+                    pos_hint: {'center_y': .5}
+                    on_state: root.schedule_notifications_update()
+
+            AppButton:
+                text: "Delete User Data"
+                on_state: root.schedule_deletedata_update()
+                color_normal: utils.get_color_from_hex("#FF8787")
+                color_pressed: utils.get_color_from_hex("#a45454")
+
+            Widget:
+
+            Label:
+                id: lblFeedbackLabel
+                color: utils.get_color_from_hex("#FF0000")
+                font_size: '24sp'
+                valign: 'middle'
+                padding: [20] if self.text != '' else [0]
+                text_size: self.size
+                halign: 'center'
+
+                size_hint: (1, None)
+                height: self.texture_size[1] if self.text != '' else 0
+                    
+            Widget:
+
+        Label:
+            text: "Version Number: vX.X.X"
+            size_hint: (1, None)
+            height: '35dp'
+            font_size: '24sp'
+
+            canvas.before:
+                Color:
+                    rgba: utils.get_color_from_hex("#D9D9D9")
+                Rectangle:
+                    size: self.size
+                    pos: self.pos

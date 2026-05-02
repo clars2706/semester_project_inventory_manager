@@ -1,0 +1,87 @@
+#:kivy 1.0
+
+<ReportsScreen>:
+    name: 'reports'
+    
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 15
+        
+        Label:
+            text: 'Inventory Reports'
+            font_size: '24sp'
+            bold: True
+            size_hint_y: None
+            height: '50dp'
+        
+        # Summary Section
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: '100dp'
+            padding: 10
+            spacing: 5
+            
+            canvas.before:
+                Color:
+                    rgba: (0.9, 0.9, 0.9, 1)
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            
+            Label:
+                text: 'Summary'
+                font_size: '18sp'
+                bold: True
+                size_hint_y: 0.3
+            
+            Label:
+                id: summary_label
+                text: 'Loading...'
+                size_hint_y: 0.7
+        
+        # Inventory Value Section
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: '80dp'
+            padding: 10
+            spacing: 5
+            
+            canvas.before:
+                Color:
+                    rgba: (0.9, 0.9, 0.9, 1)
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            
+            Label:
+                id: value_label
+                text: 'Total Inventory Value: $0.00'
+                font_size: '16sp'
+                bold: True
+        
+        # Low Stock Section
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: 0.5
+            padding: 10
+            spacing: 5
+            
+            Label:
+                text: 'Low Stock Items (< 10 units)'
+                font_size: '16sp'
+                bold: True
+                size_hint_y: None
+                height: '30dp'
+            
+            ScrollView:
+                
+                GridLayout:
+                    id: low_stock_grid
+                    cols: 3
+                    spacing: 5
+                    size_hint_y: None
+                    height: self.minimum_height
+                    padding: 5

@@ -1,0 +1,111 @@
+#:kivy 1.0
+
+<ItemAddScreen>:
+    name: 'item_add'
+    
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 15
+        
+        Label:
+            text: 'Add New Item'
+            font_size: '24sp'
+            bold: True
+            size_hint_y: None
+            height: '50dp'
+        
+        GridLayout:
+            cols: 1
+            spacing: 10
+            size_hint_y: None
+            height: self.minimum_height
+            
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: '50dp'
+                
+                Label:
+                    text: 'SKU:'
+                    size_hint_y: 0.3
+                
+                TextInput:
+                    id: sku_input
+                    multiline: False
+                    input_filter: 'int'
+                    hint_text: 'Enter SKU number'
+            
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: '50dp'
+                
+                Label:
+                    text: 'Product Name:'
+                    size_hint_y: 0.3
+                
+                TextInput:
+                    id: product_input
+                    multiline: False
+                    hint_text: 'Enter product name'
+            
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: '50dp'
+                
+                Label:
+                    text: 'Supplier:'
+                    size_hint_y: 0.3
+                
+                TextInput:
+                    id: supplier_input
+                    multiline: False
+                    hint_text: 'Enter supplier name'
+            
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: '50dp'
+                
+                Label:
+                    text: 'Quantity:'
+                    size_hint_y: 0.3
+                
+                TextInput:
+                    id: quantity_input
+                    multiline: False
+                    input_filter: 'int'
+                    hint_text: 'Enter quantity'
+            
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: '50dp'
+                
+                Label:
+                    text: 'Price Per Unit:'
+                    size_hint_y: 0.3
+                
+                TextInput:
+                    id: ppu_input
+                    multiline: False
+                    input_filter: 'float'
+                    hint_text: 'Enter price per unit'
+        
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: '50dp'
+            spacing: 10
+            
+            Button:
+                text: 'Add Item'
+                background_color: (0.2, 0.6, 0.2, 1)
+                on_press: root.add_item()
+            
+            Button:
+                text: 'Clear'
+                background_color: (0.6, 0.6, 0.6, 1)
+                on_press: root.clear_inputs()

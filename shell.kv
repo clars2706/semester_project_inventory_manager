@@ -1,0 +1,90 @@
+#:kivy 1.0
+
+<AppShell>:
+    orientation: 'vertical'
+    screen_manager: screen_manager
+    tabs: tabs
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: (1, None)
+        height: '60dp'
+        padding: (10, 10)
+        spacing: 10
+
+        canvas.before:
+            Color: 
+                rgba: (0.1, 0.4, 0.7, 1)
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        Label:
+            text: "[b]Inventory Manager[/b]"
+            font_size: '20sp'
+            markup: True
+            color: (1, 1, 1, 1)
+            text_size: self.size
+            halign: 'left'
+            valign: 'middle'
+
+    WindowManager:
+        id: screen_manager
+
+        DashboardScreen:
+            name: 'dashboard'
+        
+        ItemAddScreen:
+            name: 'item_add'
+        
+        ItemManagerScreen:
+            name: 'item_manager'
+        
+        ReportsScreen:
+            name: 'reports'
+    
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: (1, None)
+        height: '60dp'
+        id: tabs
+        spacing: 5
+        padding: (5, 5)
+
+        canvas.before:
+            Color:
+                rgba: (0.95, 0.95, 0.95, 1)
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        TabButton:
+            text: 'Dashboard' 
+            route: 'dashboard' 
+            is_active: True
+
+        TabButton:
+            text: 'Add Item' 
+            route: 'item_add' 
+
+        TabButton:
+            text: 'Manage' 
+            route: 'item_manager'
+
+        TabButton:
+            text: 'Reports'
+            route: 'reports'
+
+
+<TabButton@Button>:
+    route: ''
+    is_active: False
+    on_press: app.root.change_screen(self.route)
+    
+    canvas.before:
+        Color:
+            rgba: (0.2, 0.6, 0.8, 1) if self.is_active else (0.7, 0.7, 0.7, 1)
+        Rectangle:
+            size: self.size
+            pos: self.pos 
